@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>RabbitPlays · Creations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      --bg: #f5f5f7;
+      --card-bg: #ffffff;
+      --border: #e0e0e0;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --radius: 12px;
+      --shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Header */
+
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: var(--accent);
+      font-size: 0.9rem;
+    }
+
+    .brand-text-main {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .brand-text-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    nav {
+      display: flex;
+      gap: 8px;
+      background: #f3f4f6;
+      padding: 4px;
+      border-radius: 999px;
+    }
+
+    .nav-tab {
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      padding: 6px 14px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .nav-tab.active {
+      background: #ffffff;
+      color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent-soft);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pill-btn {
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+    }
+
+    .pill-btn.primary {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+    }
+
+    /* Main layout */
+
+    main {
+      max-width: 980px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 20px 16px 32px;
+      flex: 1;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    /* Home */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 16px 18px;
+    }
+
+    .hero-title {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+
+    .hero-sub {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .hero-list {
+      list-style: none;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .hero-list li {
+      margin-bottom: 4px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .hero-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .metrics {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .metric-row span:first-child {
+      color: var(--text-main);
+    }
+
+    /* About */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+      gap: 16px;
+    }
+
+    .about-text p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #f3f4f6;
+      color: var(--text-muted);
+    }
+
+    .social-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.9rem;
+    }
+
+    .social-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 8px;
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    .social-item span:first-child {
+      color: var(--text-main);
+    }
+
+    .social-item span:last-child {
+      color: var(--accent);
+    }
+
+    /* Creations */
+
+    .creations-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .creations-header h2 {
+      font-size: 1.2rem;
+    }
+
+    .creations-header p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .creations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .creation-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px 12px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: box-shadow 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
+    }
+
+    .creation-card:hover {
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+      border-color: var(--accent-soft);
+    }
+
+    .creation-title {
+      font-weight: 600;
+    }
+
+    .creation-meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .creation-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 4px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .creation-pill {
+      background: #f3f4f6;
+      padding: 3px 8px;
+      border-radius: 999px;
+    }
+
+    .creation-cta {
+      color: var(--accent);
+    }
+
+    /* Modal */
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 20;
+    }
+
+    .modal-backdrop.show {
+      display: flex;
+    }
+
+    .modal {
+      width: min(420px, 94vw);
+      background: #ffffff;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+      display: flex;
+      flex-direction: column;
+      max-height: 90vh;
+    }
+
+    .modal-header {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .modal-title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .modal-title {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .modal-sub {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .modal-close {
+      border: none;
+      background: transparent;
+      font-size: 1rem;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .modal-body {
+      padding: 10px 14px 8px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      overflow-y: auto;
+    }
+
+    .modal-body p {
+      margin-bottom: 8px;
+    }
+
+    .modal-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 6px;
+      font-size: 0.8rem;
+    }
+
+    .modal-meta-chip {
+      background: #f3f4f6;
+      border-radius: 999px;
+      padding: 4px 8px;
+    }
+
+    .modal-footer {
+      padding: 8px 14px 10px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      background: #ffffff;
+      color: var(--text-muted);
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #ffffff;
+    }
+
+    .btn.secondary {
+      background: #f3f4f6;
+    }
+
+    /* TOAST – bottom center */
+
+    .toast-container {
+      position: fixed;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 30;
+      display: flex;
+      justify-content: center;
+      pointer-events: none; /* clicks go through when hidden */
+    }
+
+    .toast {
+      min-width: 220px;
+      max-width: 320px;
+      background: #ffffff;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      padding: 8px 14px;
+      font-size: 0.85rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      pointer-events: auto; /* allow clicks if needed */
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 760px) {
+      .hero,
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        flex-wrap: wrap;
+      }
+
+      .header-actions {
+        width: 100%;
+        justify-content: flex-end;
+      }
+    }
+
+    @media (max-width: 520px) {
+      header {
+        justify-content: center;
+      }
+
+      .brand-text-sub {
+        display: none;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .pill-btn, .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .toast {
+        width: calc(100% - 32px);
+        border-radius: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="brand-logo">R</div>
+      <div>
+        <div class="brand-text-main">RabbitPlays</div>
+        <div class="brand-text-sub">Bloxd.io</div>
+      </div>
+    </div>
+
+    <nav aria-label="Main navigation">
+      <button class="nav-tab active" data-section="home">Home</button>
+    
+      <button class="nav-tab" data-section="creations">Creations</button>
+    </nav>
+
+    
+  </header>
+
+  <main>
+    <!-- HOME -->
+    <section id="home" class="section active">
+      <div class="hero">
+        <div class="card">
+          <h1 class="hero-title">Bloxd.io creations by RabbitPlaysYT</h1>
+          <p class="hero-sub">
+            Hi, I copy build maps and create an EXACT copy of it in Bloxd.io and I enjoy doing it!
+          </p>
+
+          
+
+          <div class="hero-actions">
+            <button class="pill-btn primary" type="button" id="goCreations">View schematics</button>
+          </div>
+
+          
+        </div>
+
+        <div class="card">
+          <div class="metrics">
+            <div class="metric-row">
+              <span>Copied Successfull Builds</span>
+              <span>1</span>
+            </div>
+            <div class="metric-row">
+              <span>Will Create More</span>
+              <span>Yes</span>
+            </div>
+            <div class="metric-row">
+              <span>Copied Failed Builds</span>
+              <span>No</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+
+    <!-- CREATIONS -->
+    <section id="creations" class="section">
+      <div class="card">
+        <div class="creations-header">
+          <div>
+            <h2>Copied Maps</h2>
+            <p>You can now download the maps!</p>
+          </div>
+        </div>
+
+        <div class="creations-grid" id="creationsGrid">
+          <!-- Cards added by JS -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODAL -->
+  <div class="modal-backdrop" id="creationModalBackdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="creationModalTitle">
+      <div class="modal-header">
+        <div class="modal-title-block">
+          <div class="modal-title" id="creationModalTitle">Creation title</div>
+          <div class="modal-sub" id="creationModalSub">Short subtitle.</div>
+        </div>
+        <button class="modal-close" type="button" id="creationModalClose" aria-label="Close modal">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-meta-row">
+          <span class="modal-meta-chip" id="creationDifficultyChip">Build: –</span>
+          <span class="modal-meta-chip" id="creationSizeChip">Size: –</span>
+          <span class="modal-meta-chip" id="creationGameChip">Game: –</span>
+        </div>
+
+        <p id="creationModalDescription">
+          Description for this schematic.
+        </p>
+      </div>
+
+      <div class="modal-footer">
+        
+        <a class="btn primary" id="downloadButton" href="#" download>Download schematic</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST ELEMENT -->
+  <div class="toast-container">
+    <div class="toast" id="toast"></div>
+  </div>
+
+  <script>
+    // Tabs (no scroll)
+    const navTabs = document.querySelectorAll(".nav-tab");
+    const sections = document.querySelectorAll(".section");
+
+    navTabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        const sectionId = tab.getAttribute("data-section");
+
+        navTabs.forEach(t => t.classList.remove("active"));
+        sections.forEach(s => s.classList.remove("active"));
+
+        tab.classList.add("active");
+        const section = document.getElementById(sectionId);
+        if (section) section.classList.add("active");
+      });
+    });
+
+    // "View schematics" button on home
+    document.getElementById("goCreations")?.addEventListener("click", () => {
+      const creationsTab = document.querySelector('.nav-tab[data-section="creations"]');
+      if (creationsTab) {
+        creationsTab.click();
+        showToast("Opened creations section");
+      }
+    });
+
+    // Creations data
+    const creations = [
+      {
+        id: "dress_up_map",
+        title: "Dress Up Map",
+        subtitle: "Nice Map",
+        difficulty: "EXACT",
+        size: "Medium",
+        game: "Bloxd.io",
+        shortMeta: "The OFFICIAL Dress Up Map Here",
+        pill: "Copied 2/4/26",
+        schematicUrl: "Dress-Up-Map.bloxdschem",
+        loadCommand: "//schem load rabbit_intrusion_core",
+        description: "The OFFICIAL Dress Up Map Here"
+      },
+      
+    ];
+
+    const creationsGrid = document.getElementById("creationsGrid");
+
+    function createCreationCard(c) {
+      const card = document.createElement("article");
+      card.className = "creation-card";
+      card.setAttribute("data-creation-id", c.id);
+      card.innerHTML = `
+        <div class="creation-title">${c.title}</div>
+        <div class="creation-meta">${c.shortMeta}</div>
+        <div class="creation-footer">
+          <span class="creation-pill">${c.pill}</span>
+          <span class="creation-cta">Open</span>
+        </div>
+      `;
+      card.addEventListener("click", () => openCreationModal(c.id));
+      return card;
+    }
+
+    creations.forEach(c => creationsGrid.appendChild(createCreationCard(c)));
+
+    // Modal logic
+    const modalBackdrop = document.getElementById("creationModalBackdrop");
+    const modalClose = document.getElementById("creationModalClose");
+    const modalTitle = document.getElementById("creationModalTitle");
+    const modalSub = document.getElementById("creationModalSub");
+    const modalDesc = document.getElementById("creationModalDescription");
+    const modalDiffChip = document.getElementById("creationDifficultyChip");
+    const modalSizeChip = document.getElementById("creationSizeChip");
+    const modalGameChip = document.getElementById("creationGameChip");
+    const downloadButton = document.getElementById("downloadButton");
+    const copyCommandButton = document.getElementById("copyCommandButton");
+
+    let currentCreation = null;
+
+    function openCreationModal(id) {
+      const creation = creations.find(c => c.id === id);
+      if (!creation) return;
+      currentCreation = creation;
+
+      modalTitle.textContent = creation.title;
+      modalSub.textContent = creation.subtitle;
+      modalDesc.textContent = creation.description;
+      modalDiffChip.textContent = "Build: " + creation.difficulty;
+      modalSizeChip.textContent = "Size: " + creation.size;
+      modalGameChip.textContent = "Game: " + creation.game;
+      downloadButton.href = creation.schematicUrl;
+      downloadButton.setAttribute("download", creation.id + ".schem");
+
+      modalBackdrop.classList.add("show");
+      modalBackdrop.setAttribute("aria-hidden", "false");
+    }
+
+    function closeCreationModal() {
+      modalBackdrop.classList.remove("show");
+      modalBackdrop.setAttribute("aria-hidden", "true");
+    }
+
+    modalClose.addEventListener("click", closeCreationModal);
+    modalBackdrop.addEventListener("click", (e) => {
+      if (e.target === modalBackdrop) closeCreationModal();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modalBackdrop.classList.contains("show")) {
+        closeCreationModal();
+      }
+    });
+
+    copyCommandButton.addEventListener("click", () => {
+      if (!currentCreation) return;
+      const text = currentCreation.loadCommand || "";
+      if (!navigator.clipboard) {
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+        showToast("Copied command to clipboard");
+        return;
+      }
+      navigator.clipboard.writeText(text).then(() => {
+        showToast("Copied command to clipboard");
+      });
+    });
+
+    downloadButton.addEventListener("click", () => {
+      if (currentCreation) {
+        showToast("Downloading schematic: " + currentCreation.title);
+      }
+    });
+
+    // TOAST logic
+    const toastEl = document.getElementById("toast");
+    let toastTimeout = null;
+
+    function showToast(message) {
+      if (!toastEl) return;
+      toastEl.textContent = message;
+
+      // Clear any existing timeout and show
+      clearTimeout(toastTimeout);
+      toastEl.classList.add("show");
+
+      // Hide after 2.5 seconds
+      toastTimeout = setTimeout(() => {
+        toastEl.classList.remove("show");
+      }, 2500);
+    }
+  </script>
+</body>
+</html>
